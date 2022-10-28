@@ -5,6 +5,10 @@ void newPage(BuildContext context, Widget newPage) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => newPage));
 }
 
+void newPageRoute(BuildContext context, String routeName) {
+  Navigator.pushNamed(context, routeName);
+}
+
 void newPageDestroyPrevious(BuildContext context, String routeName) {
   Navigator.pushReplacementNamed(context, routeName);
 }

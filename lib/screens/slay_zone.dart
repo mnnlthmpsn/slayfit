@@ -23,7 +23,7 @@ class SlayZone extends StatelessWidget {
               bottom: MediaQuery.of(context).size.height * .02,
               left: MediaQuery.of(context).size.width * .1,
               right: MediaQuery.of(context).size.width * .1,
-              child: KButton(onPressed: () => newPage(context, const SetUp())))
+              child: KButton(onPressed: () => newPage(context, const SetUp()), label: 'Next'))
         ],
       ),
     )));

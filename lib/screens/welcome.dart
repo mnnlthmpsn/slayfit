@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayfit/blocs/name.blocs.dart';
 import 'package:stayfit/components/kButton.dart';
 import 'package:stayfit/components/kTextInput.dart';
 import 'package:stayfit/config/_helpers.dart';
 import 'package:stayfit/config/_sizes.dart';
+import 'package:stayfit/events/name.events.dart';
 import 'package:stayfit/screens/slay_zone.dart';
+import 'package:stayfit/states/name.states.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class Welcome extends StatelessWidget {
                 SizedBox(height: MediaQuery.of(context).size.height * .1),
                 _ageWidget(),
                 SizedBox(height: MediaQuery.of(context).size.height * .1),
-                KButton(onPressed: () => newPage(context, const SlayZone()))
+                KButton(onPressed: () => newPage(context, const SlayZone()), label: 'Next')
               ],
             ),
           ),
@@ -41,7 +46,7 @@ class Welcome extends StatelessWidget {
   }
 
   Widget _nameWidget() {
-    return Builder(builder: (BuildContext context) {
+    return BlocBuilder<NameBloc, NameState>(builder: (BuildContext context, NameState state) {
       return Column(
         children: [
           Text('What\'s your name?',
@@ -49,7 +54,7 @@ class Welcome extends StatelessWidget {
                   .textTheme
                   .headline6
                   ?.copyWith(color: Colors.white)),
-          KTextInput()
+          KTextInput(onChange: (val) => context.read<NameBloc>().add(SetGlobalName(name: val)))
         ],
       );
     });
@@ -64,7 +69,7 @@ class Welcome extends StatelessWidget {
                   .textTheme
                   .headline6
                   ?.copyWith(color: Colors.white)),
-          KTextInput()
+          KTextInput(onChange: (val) => {})
         ],
       );
     });

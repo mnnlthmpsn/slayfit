@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class KButton extends StatelessWidget {
   final VoidCallback onPressed;
+  final String label;
+  final bool? isPrimary;
 
-  const KButton({Key? key, required this.onPressed}) : super(key: key);
+  const KButton({Key? key, this.isPrimary = true, required this.onPressed, required this.label}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +13,10 @@ class KButton extends StatelessWidget {
       height: 60,
       width: MediaQuery.of(context).size.width * .6,
       child: TextButton(
-        child: Text('NEXT', style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.purpleAccent, fontSize: 18)),
+        child: Text(label.toUpperCase(), style: Theme.of(context).textTheme.headline6?.copyWith(color: isPrimary == true ? Colors.purple : Colors.white, fontSize: 18)),
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          backgroundColor: Colors.white,
+          backgroundColor: isPrimary == true ? Colors.white : Colors.purpleAccent,
           primary: Colors.purple,
           shape: RoundedRectangleBorder(
             side: BorderSide.none,
